@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Will You Be My Girlfriend?</title>
+<style>
+  /* General styles */
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: #ffe4e6;
+    color: #8b3e5f;
+    overflow-x: hidden;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+  }
+  .container {
+    background: #fff0f6;
+    border-radius: 20px;
+    padding: 3rem 4rem;
+    max-width: 440px;
+    box-shadow: 0 8px 25px rgba(203, 82, 121, 0.3);
+    text-align: center;
+    position: relative;
+  }
+  h1 {
+    font-weight: 700;
+    font-size: 2.6rem;
+    margin-bottom: 2rem;
+    letter-spacing: 1px;
+    color: #c81e64;
+  }
+  p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: #a63a6d;
+  }
+  button {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    font-weight: 700;
+    font-size: 1.2rem;
+    padding: 0.8rem 2.2rem;
+    margin: 0 1rem;
+    color: white;
+    background: #d6336c;
+    box-shadow: 0 6px 15px rgba(214, 51, 108, 0.5);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  button:hover {
+    background-color: #b32a5b;
+    transform: scale(1.05);
+  }
+  button:active {
+    transform: scale(0.95);
+  }
+  #no-btn {
+    background-color: #f58fa9;
+    box-shadow: 0 6px 15px rgba(245, 143, 169, 0.5);
+    position: relative;
+    transition: none;
+  }
+  #no-btn:hover {
+    background-color: #e57385;
+  }
+  /* Hide all pages initially */
+  .page {
+    display: none;
+  }
+  .active {
+    display: block;
+  }
+  /* Schedule form styles */
+  .schedule-option {
+    display: block;
+    margin: 1rem auto 0;
+    font-size: 1.1rem;
+    color: #a63a6d;
+    font-weight: 600;
+  }
+  label {
+    display: block;
+    margin-bottom: 0.3rem;
+    cursor: pointer;
+  }
+  input[type="date"], select {
+    width: 100%;
+    padding: 0.6rem 1rem;
+    margin-bottom: 1.3rem;
+    border-radius: 40px;
+    border: 1.5px solid #d6336c;
+    font-size: 1rem;
+    color: #8b3e5f;
+    outline: none;
+    transition: border-color 0.3s ease;
+  }
+  input[type="date"]:focus, select:focus {
+    border-color: #a12c5a;
+  }
+  .final-schedule {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #c81e64;
+    margin-top: 1.8rem;
+  }
+  /* Heart styles and animation */
+  .heart {
+    position: fixed;
+    pointer-events: none;
+    width: 20px;
+    height: 20px;
+    background: #f06292;
+    transform-origin: center;
+    animation: floatUp 1.5s ease forwards;
+    z-index: 10000;
+  }
+  .heart:before,
+  .heart:after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: #f06292;
+    border-radius: 50%;
+  }
+  .heart:before {
+    top: -10px;
+    left: 0;
+  }
+  .heart:after {
+    left: 10px;
+    top: 0;
+  }
+  @keyframes floatUp {
+    0% {
+      opacity: 1;
+      transform: translateY(0) scale(1) rotate(0deg);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(-80px) scale(1.5) rotate(45deg);
+    }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Page 1 -->
+  <section id="page1" class="page active">
+    <h1>Will you be my girlfriend?</h1>
+    <div>
+      <button id="yes-btn">Yes</button>
+      <button id="no-btn">No</button>
+    </div>
+  </section>
+
+  <!-- Page 2: Three possible pages with Yes I do to choose from randomly -->
+  <section id="page2-1" class="page">
+    <h1>Really? 💖</h1>
+    <p>Will you say "Yes I do" to me?</p>
+    <button class="yes-ido-btn">Yes I do</button>
+  </section>
+  <section id="page2-2" class="page">
+    <h1>I'm so happy! 💕</h1>
+    <p>Will you say "Yes I do" and make me the happiest?</p>
+    <button class="yes-ido-btn">Yes I do</button>
+  </section>
+  <section id="page2-3" class="page">
+    <h1>You make my heart flutter! ❤️</h1>
+    <p>Say "Yes I do" and let's start a beautiful story.</p>
+    <button class="yes-ido-btn">Yes I do</button>
+  </section>
+
+  <!-- Page 3: Schedule date -->
+  <section id="page3" class="page">
+    <h1>Let's plan our date! 🌹</h1>
+    <label for="date-picker">Pick a date:</label>
+    <input type="date" id="date-picker" min="" />
+    <label for="activity-select" class="schedule-option">Choose an activity:</label>
+    <select id="activity-select">
+      <option value="Cinema">Cinema</option>
+      <option value="Eating Pizza">Eating Pizza</option>
+      <option value="Our Both Schedule">Our Both Schedule</option>
+    </select>
+    <button id="continue-btn">Continue</button>
+  </section>
+
+  <!-- Final page with confirmation -->
+  <section id="final-page" class="page">
+    <h1>Our date is set! 💞</h1>
+    <p class="final-schedule" id="final-schedule-text"></p>
+  </section>
+
+</div>
+
+<script>
+  // Heart animation following cursor
+  document.addEventListener('mousemove', function(e) {
+    const heart = document.createElement('div');
+    heart.className = 'heart';
+    heart.style.left = e.pageX - 10 + 'px';
+    heart.style.top = e.pageY - 10 + 'px';
+    heart.style.backgroundColor = randomPinkShade();
+    heart.style.setProperty('--heart-color', heart.style.backgroundColor);
+    document.body.appendChild(heart);
+    setTimeout(() => {
+      heart.remove();
+    }, 1500);
+  });
+
+  function randomPinkShade() {
+    const pinkShades = ['#f06292', '#ec407a', '#e91e63', '#d81b60', '#c2185b', '#ad1457'];
+    return pinkShades[Math.floor(Math.random() * pinkShades.length)];
+  }
+
+  // Page state management
+  const pages = {
+    1: document.getElementById('page1'),
+    2: [
+      document.getElementById('page2-1'),
+      document.getElementById('page2-2'),
+      document.getElementById('page2-3'),
+    ],
+    3: document.getElementById('page3'),
+    final: document.getElementById('final-page'),
+  };
+
+  const yesBtn = document.getElementById('yes-btn');
+  const noBtn = document.getElementById('no-btn');
+  const yesIdoBtns = document.querySelectorAll('.yes-ido-btn');
+  const continueBtn = document.getElementById('continue-btn');
+  const datePicker = document.getElementById('date-picker');
+  const activitySelect = document.getElementById('activity-select');
+  const finalScheduleText = document.getElementById('final-schedule-text');
+
+  // Initialize minimum date for datepicker to today
+  function setMinDateForDatePicker() {
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = (today.getMonth() + 1).toString().padStart(2, '0');
+    const dd = today.getDate().toString().padStart(2, '0');
+    datePicker.min = `${yyyy}-${mm}-${dd}`;
+  }
+  setMinDateForDatePicker();
+
+  // Show page helper
+  function showPage(page) {
+    // Hide all
+    pages[1].classList.remove('active');
+    pages[2].forEach(p => p.classList.remove('active'));
+    pages[3].classList.remove('active');
+    pages.final.classList.remove('active');
+    // Show specified
+    if(page === 1) pages[1].classList.add('active');
+    else if(typeof page === 'number' && page === 3) pages[3].classList.add('active');
+    else if(page === 'final') pages.final.classList.add('active');
+    else if(typeof page === 'number' && page >= 2 && page <=4 ) pages[2][page-2].classList.add('active');
+    // page is page2 index in 0-based? If needed adjust
+  }
+
+  // No button runaway logic
+  noBtn.addEventListener('mouseenter', () => {
+    const containerRect = document.querySelector('.container').getBoundingClientRect();
+    const btnRect = noBtn.getBoundingClientRect();
+
+    const padding = 20;
+    // calculate new position randomly avoiding container edges
+    let newLeft, newTop;
+
+    const containerWidth = containerRect.width;
+    const containerHeight = containerRect.height;
+    const btnWidth = btnRect.width;
+    const btnHeight = btnRect.height;
+
+    // random left and top within container boundaries minus btn size and padding
+    do {
+      newLeft = Math.random() * (containerWidth - btnWidth - padding * 2) + padding;
+      newTop = Math.random() * (containerHeight - btnHeight - padding * 2) + padding;
+    } while (
+      (Math.abs(newLeft - btnRect.left + containerRect.left) < btnWidth) &&
+      (Math.abs(newTop - btnRect.top + containerRect.top) < btnHeight)
+    );
+
+    noBtn.style.position = 'absolute';
+    noBtn.style.left = newLeft + 'px';
+    noBtn.style.top = newTop + 'px';
+  });
+
+  // On Yes button click: go to one of 3 pages randomly
+  yesBtn.addEventListener('click', () => {
+    // Reset no button position if moved
+    noBtn.style.position = 'relative';
+    noBtn.style.left = '0';
+    noBtn.style.top = '0';
+
+    // Select random page index 0,1,2
+    let randomIndex = Math.floor(Math.random() * 3);
+    // Show that page 2 variation
+    pages[1].classList.remove('active');
+    pages[2].forEach(p => p.classList.remove('active'));
+    pages[2][randomIndex].classList.add('active');
+  });
+
+  // Yes I do buttons click: go to page 3 (schedule)
+  yesIdoBtns.forEach(button => {
+    button.addEventListener('click', () => {
+      pages[2].forEach(p => p.classList.remove('active'));
+      pages[3].classList.add('active');
+    });
+  });
+
+  // Continue button on page 3 to finalize schedule and show final page
+  continueBtn.addEventListener('click', () => {
+    const selectedDate = datePicker.value;
+    const selectedActivity = activitySelect.value;
+
+    if (!selectedDate) {
+      alert('Please pick a date first ♡');
+      return;
+    }
+
+    const dateObj = new Date(selectedDate);
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const formattedDate = dateObj.toLocaleDateString(undefined, options);
+
+    finalScheduleText.textContent = `We will enjoy ${selectedActivity} together on ${formattedDate}. Can't wait! 💖`;
+
+    pages[3].classList.remove('active');
+    pages.final.classList.add('active');
+  });
+</script>
+</body>
+</html>
+
